@@ -11,7 +11,10 @@ function Navbar () {
                 <option>Reserved</option>
                 <option>Unreserved</option>
             </Select>
-            <div>Recipes</div>
+            <Select placeholder="Recipes">
+                <options></options>
+                <options></options>
+            </Select>
             <div>Grocery List</div>
             <div>Expired</div>
         </div>
