@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon server.js",
-    "e2e": "node_modules/.bin/cypress open"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
