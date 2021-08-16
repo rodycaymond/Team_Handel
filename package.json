@@ -1,0 +1,19 @@
+{
+  "name": "team_handel",
+  "version": "1.0.0",
+  "description": "Project week 2: an app which facilitates meal prepping for its users",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodycaymond/Team_Handel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodycaymond/Team_Handel/issues"
+  },
+  "homepage": "https://github.com/rodycaymond/Team_Handel#readme"
+}
