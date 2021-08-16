@@ -1,0 +1,12 @@
+.NavBar {
+    display: flex;
+    flex-direction: row;
+}
+
+.NavBar > div {
+    padding: 0 1em 0 1em;
+}
+.select {
+    min-width: 20%;
+    margin: 0% 2.5%;
+}
