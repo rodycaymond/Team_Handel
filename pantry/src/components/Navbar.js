@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dropdown, DropdwonButton } from 'react';
 import './NavBar.css'
 import Select, { NonceProvider } from 'react-select';
 import { Link, useHistory } from 'react-router-dom';
@@ -46,6 +46,14 @@ function Navbar (props) {
             </Select>
             <Select placeholder="Grocery List" className="select" value={selectedValueGrocery} options={groceryList} onChange={handleChangeGrocery}>
             </Select>
+            
+            <Dropdown>
+                <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    </DropdownButton>
+            </Dropdown>
             <div className="select" >
                 Expired
             </div>

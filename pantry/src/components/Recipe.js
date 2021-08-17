@@ -12,7 +12,7 @@ function RecipeBody (props){
     return (
         <div className="PantryBody">
             {/* {itemList} */}
-            <p>hello worlds</p>
+            <p>{props.state}</p>
         </div>
     )
 }

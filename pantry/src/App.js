@@ -4,6 +4,7 @@ import './App.css';
 import NavBar from './components/Navbar';
 import PantryBody from './components/Pantry.js';
 import RecipeBody from './components/Recipe.js';
+import GroceryBody from './components/Grocery.js';
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
         <p>this is the body</p>
         <Route path="/Pantry" component={props=><PantryBody state={state}/>}/>
         <Route path="/Recipes" component={props=><RecipeBody state={state}/>}/>
-        <Route path="/Grocery" />
+        <Route path="/Grocery" component={props=><GroceryBody state={state}/>}/>
       </div>
     </div>
     </Router>
