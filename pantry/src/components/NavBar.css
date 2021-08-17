@@ -10,7 +10,12 @@
     width: 20%;
     margin: auto;
     font-size: 0.8em;
+    color: grey;
 }
-.hide {
-    display: none;
+.expired {
+    width: 20%;
+    margin: auto;
+    font-size: 1.0em;
+    color: grey;
+    padding: 4px;
 }

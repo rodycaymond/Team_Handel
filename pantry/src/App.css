@@ -15,4 +15,8 @@
       border: 2px solid white;
       
   }
+  .title {
+      text-decoration: none;
+      color: whitesmoke;
+  }
 

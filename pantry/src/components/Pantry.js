@@ -2,16 +2,52 @@ import { useState, useEffect } from 'react';
 
 function PantryBody (props){
     
-    // let pantryDesignator = props.state;
-    // let pantryItemList = [];
-
-    // let itemList=items.map((item,index)=>{
-    //     return <li key={index}>{item}</li>
-    //   })
-
+    /*
+if (props.state === 'All'){
+    let allPantryItems = //fetch call .map((item,index)=>{
+        return <li key={index}>{item.name}</li>
+    });
     return (
         <div className="PantryBody">
-            {/* {itemList} */}
+            <ul>
+                {allPantryItems}
+            </ul>
+        </div>
+    )
+} else if (props.state === 'Reserved'){
+    let reservedItems = //fetch call .filter(item=>{
+        return item.reservation === 'reserved';
+    });
+    let pantryItems = reservedItems.map((item,index)=>{
+        return <li key={index}>{item.name}</li>
+    });
+    return (
+        <div className="PantryBody">
+            <ul>
+                {pantryItems}
+            </ul>
+        </div>
+    )
+} else if (props.state === 'Unreserved'){
+    let unreservedItems = //fetch call .filter(item=>{
+        return item.reservation === 'unreserved';
+    });
+    let pantryItems = unreservedItems.map((item,index)=>{
+        return <li key={index}>{item.name}</li>
+    });
+    return (
+        <div className="PantryBody">
+            <ul>
+                {pantryItems}
+            </ul>
+        </div>
+    )
+}
+
+    */
+    return (
+        <div className="PantryBody">
+
             <p>{props.state}</p>
         </div>
     )
