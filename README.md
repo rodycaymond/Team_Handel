@@ -6,6 +6,10 @@ Project week 2: an app which facilitates meal prepping for its users
 ```
 docker-compose up -d
 ```
+- create DB schema on your container with knex:
+```
+npx knex migrate:latest
+```
 - running the unit tests:
 ```
 yarn test
