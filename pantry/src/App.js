@@ -32,7 +32,7 @@ function App() {
 
 function Home(){
   return (
-    <p>Welcome to your Pantry &reg;</p>
+    <p aria-label="Home">Welcome to your Pantry &reg;</p>
   )
 };
 
