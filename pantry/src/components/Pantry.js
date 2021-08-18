@@ -46,8 +46,7 @@ if (props.state === 'All'){
 
     */
     return (
-        <div className="PantryBody">
-
+        <div aria-label="PantryBody" className="PantryBody">
             <p>{props.state}</p>
         </div>
     )

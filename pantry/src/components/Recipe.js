@@ -10,7 +10,7 @@ function RecipeBody (props){
             return (
                 <div key={index}>
                     <label htmlFor={item+(index+1)+":"}>{item + ' ' + (index+1)}</label>
-                    <input name={item+(index+1)} placeholder="Grocery Item"></input>
+                    <input name={item+(index+1)} placeholder="Ingredient"></input>
                     <label htmlFor="amount">{"Amount"+":"}</label>
                     <input name='amount' placeholder="Amount"></input>
                     <br></br><br></br>
@@ -22,11 +22,15 @@ function RecipeBody (props){
         }
         if (props.state === 'Create'){
         return (
-            <div>
+            <div aria-label="RecipeBody" >
                 <button onClick={()=>setAddItem(addItem+1)}>Add a new item</button>
                 <form onSubmit={handleSubmit}>
                     <fieldset>
                         <legend>New Recipe</legend>
+                        <label htmlFor="Recipe Name">Recipe Name</label>
+                        <input name="Recipe Name" placeholder="Recipe name"></input>
+                        <label htmlFor="Instructions">Instructions</label>
+                        <input name="Instructions" placeholder="instructions"></input><br></br><br></br>
                         {createRecipes}
                     </fieldset>
                     <input type="submit" className="submit"></input>
@@ -66,7 +70,7 @@ function RecipeBody (props){
     */
 
     return (
-        <div className="PantryBody">
+        <div aria-label="RecipeBody" className="RecipeBody">
             <p>{props.state}</p>
         </div>
     )

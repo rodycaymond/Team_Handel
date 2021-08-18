@@ -22,7 +22,7 @@ function GroceryBody (props){
 
     if (props.state === 'NewList'){
         return (
-            <div>
+            <div aria-label="GroceryBody">
                 <button onClick={()=>setAddItem(addItem+1)}>Add a new item</button>
                 <form onSubmit={handleSubmit}>
                     <fieldset>
@@ -35,7 +35,7 @@ function GroceryBody (props){
         )
     } else if (props.state === 'CreatedLists'){
         return (
-            <div>
+            <div aria-label="GroceryBody">
                 <p>Created lists</p>
             </div>
         )
