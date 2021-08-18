@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "^5.0.2",
     "cypress": "^8.3.0",
+    "jest": "^26.6.0",
     "node-fetch": "^2.6.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.4",
@@ -44,7 +45,6 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "cypress-jest-adapter": "^0.1.1",
-    "jest": "^27.0.6"
+    "cypress-jest-adapter": "^0.1.1"
   }
 }
