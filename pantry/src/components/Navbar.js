@@ -16,6 +16,7 @@ function Navbar (props) {
         {value: 'Reserved', label: 'Reserved'},
         {value: 'Unreserved', label: 'Unreserved'}];
     const recipes = [
+        {value: 'Create', label: 'Create'},
         {value: 'All', label: 'All'},
         {value: 'Lists', label: 'Lists'},];
     const groceryList = [
@@ -43,15 +44,12 @@ function Navbar (props) {
 
     return (
         <div className="NavBar" aria-label="navbar">
-            <Select placeholder="Pantry" style={{color: 'grey'}} className="select" value={selectedValuePantry} options={pantry} onChange={handleChangePantry}>
+            <Select placeholder="Pantry"  aria-label="Pantry" style={{color: 'grey'}} className="select" value={selectedValuePantry} options={pantry} onChange={handleChangePantry}>
             </Select>
-            <Select placeholder="Recipes" style={{color: 'grey'}} className="select" value={selectedValueRecipes} options={recipes} onChange={handleChangeRecipes}>
+            <Select placeholder="Recipes" aria-label="Recipes" style={{color: 'grey'}} className="select" value={selectedValueRecipes} options={recipes} onChange={handleChangeRecipes}>
             </Select>
-            <Select placeholder="Grocery List" style={{color: 'grey'}} className="select" value={selectedValueGrocery} options={groceryList} onChange={handleChangeGrocery}>
+            <Select placeholder="Grocery List" aria-label="Grocery List" style={{color: 'grey'}} className="select" value={selectedValueGrocery} options={groceryList} onChange={handleChangeGrocery}>
             </Select>
-            
-          
-              
             <button type="button" value='expired' className="expired">Expired</button>
         </div>
     )
