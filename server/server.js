@@ -35,16 +35,22 @@ app.post('/createuser/', (req, res) => {
     .catch(err => res.status(500))
 })
 
-// add a pantry
+// add a pantry - needs to be sent an object with a user_id and pantry name 
 app.post('/addpantry/', (req, res) => {
   knex('pantry').insert({ name: req.body.name })
   const latestPantry = knex('pantry').max('pantry_id')
   knex('user').where({ user_id: req.body.user_id }).update({ pantry_id: latestPantry })
-    .then(data => { res.status(200).json(data) })
+    .then(data => { res.status(200)})
     .catch(err => { res.status(500) })
 })
 
-// add a pantry ingredient
+// add an ingredient - needs to be sent and object with a name and perishable bool 
+app.post('/ingredient', (req, res) => {
+  knex('ingredients')
+    .insert({name: req.body.name, perishable: req.body.perishable})
+    .then(data => res.status(200).json(data))
+    .catch(err => res.status(500))
+})
 
 // get all of a users ingredients in their pantry
 app.get('/pantry/:pantry_id', (req, res) => {

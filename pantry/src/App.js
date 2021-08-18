@@ -21,7 +21,7 @@ function App() {
       <NavBar state={setState}/>
         <div className="body">
           <Route exact path="/" component={Home}/>
-          <Route path="/Pantry" component={props=><PantryBody state={state}/>}/>
+          <Route path="/Pantry" component={props=><PantryBody identifier={state}/>}/>
           <Route path="/Recipes" component={props=><RecipeBody state={state}/>}/>
           <Route path="/Grocery" component={props=><GroceryBody state={state}/>}/>
         </div>
