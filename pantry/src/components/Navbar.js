@@ -16,6 +16,7 @@ function Navbar (props) {
         {value: 'Reserved', label: 'Reserved'},
         {value: 'Unreserved', label: 'Unreserved'}];
     const recipes = [
+        {value: 'Create', label: 'Create'},
         {value: 'All', label: 'All'},
         {value: 'Lists', label: 'Lists'},];
     const groceryList = [
@@ -49,9 +50,6 @@ function Navbar (props) {
             </Select>
             <Select placeholder="Grocery List" style={{color: 'grey'}} className="select" value={selectedValueGrocery} options={groceryList} onChange={handleChangeGrocery}>
             </Select>
-            
-          
-              
             <button type="button" value='expired' className="expired">Expired</button>
         </div>
     )
