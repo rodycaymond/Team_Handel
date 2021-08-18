@@ -41,4 +41,9 @@ describe('pantry app testing', ()=>{
         cy.findByText('Created Lists').should('exist');
         cy.findByText('New List').should('exist');
     })
+    it('after clicking the \'All\' option in the Pantry dropdown, a new body should be rendered', ()=>{
+        cy.findByLabelText('navbar').get('.css-yk16xz-control').contains('Pantry').click();
+        cy.findByText('All').click();
+        cy.get('PantryBody').should('exist');
+    })
 })
