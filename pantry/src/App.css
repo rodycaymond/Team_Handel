@@ -18,4 +18,16 @@
       text-decoration: none;
       color: whitesmoke;
   }
+  .login-flex {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+  }
+  .login input {
+      padding: 0;
+      height: 14px;
+  }
+  .login button {
+      margin: 10px;
+  }
 /*#FAD67C, #FCD063*/

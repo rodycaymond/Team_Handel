@@ -29,14 +29,13 @@ function RecipeBody (props){
                         <legend>New Recipe</legend>
                         <label htmlFor="Recipe Name">Recipe Name</label>
                         <input name="Recipe Name" placeholder="Recipe name"></input>
-                        <label htmlFor="Instructions">Instructions</label>
+                        <label htmlFor="Instructions"> Instructions </label>
 
-                        <textarea rows = "5" cols = "60" name = "description" placeholder="Enter details here ...">
+                        <textarea rows = "5" cols = "60" name = "instructions" placeholder="Enter details here ...">
                            
                         </textarea><br></br>
-                        <input type = "submit" value = "submit" />
 
-                        <textarea name="Instructions" placeholder="instructions"></textarea><br></br><br></br>
+                        <br></br>
                         {createRecipes}
                     </fieldset>
                     <input type="submit" className="submit"></input>
