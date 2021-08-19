@@ -6,8 +6,6 @@ exports.up = function (knex) {
         table.string('password')
         table.integer('pantry_id') // foreign key reference to id in pantry table
         table.foreign('pantry_id').references('pantry.pantry_id')
-        table.integer('recipe_id')
-        table.foreign('recipe_id').references('recipes.recipe_id') // foreign key reference to id in recipe table
     });
 };
 

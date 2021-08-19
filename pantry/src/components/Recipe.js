@@ -2,7 +2,13 @@ import { useState, useEffect } from 'react';
 import './Grocery.css';
 function RecipeBody (props){
 
-    
+        const [recipes, setRecipes] = useState([]);
+
+        useEffect(()=>{
+        fetch(`http://localhost:8080/recipes/${props.userId}`)
+        .then(res=>res.json())
+        .then(data=>setRecipes(data))
+        }, []);
     
         const [addItem, setAddItem] = useState(1);
         let inputs = Array(addItem).fill('Item');
@@ -23,36 +29,36 @@ function RecipeBody (props){
         if (props.state === 'Create'){
         return (
             <div aria-label="RecipeBody" >
-                <button onClick={()=>setAddItem(addItem+1)}>Add a new item</button>
                 <form onSubmit={handleSubmit}>
                     <fieldset>
                         <legend>New Recipe</legend>
                         <label htmlFor="Recipe Name">Recipe Name</label>
                         <input name="Recipe Name" placeholder="Recipe name"></input>
                         <label htmlFor="Instructions"> Instructions </label>
-
+                        <br></br><br></br>
                         <textarea rows = "5" cols = "60" name = "instructions" placeholder="Enter details here ...">
                            
                         </textarea><br></br>
 
                         <br></br>
                         {createRecipes}
+                        <button onClick={()=>setAddItem(addItem+1)}>Add a new item</button>
                     </fieldset>
                     <input type="submit" className="submit"></input>
                 </form>
             </div>
         )
-    } else {
-    /*
-    else if (props.state === 'All'){
-        let allRecipes = //fetch call .map((item,index)=>{
+    } else if (props.state === 'All'){
+
+        let allRecipes = recipes.map((item,index)=>{
             return (
                 <li key={index}>
-                    <p>{item.recipeName</p>
-                    <p>{item.ingredients}</p>
+                    <p>{item.recipe_name}</p>
+                    <p>{item.recipe_ingredients}</p>
                 </li>
             )
         });
+        
         return (
             <div className="RecipeBody">
                 <ul>
@@ -60,7 +66,7 @@ function RecipeBody (props){
                 </ul>
             </div>
         )
-    } else if (props.state === 'Lists'){
+    } /*else if (props.state === 'Lists'){
         let lists = //fetch call .map((item,index)=>{
             return <li key={index}>{item.recipeName}</li>
         });
@@ -73,13 +79,6 @@ function RecipeBody (props){
         )
     }
     */
-
-    return (
-        <div aria-label="RecipeBody" className="RecipeBody">
-            <p>{props.state}</p>
-        </div>
-    )
-    }
 }
 
 export default RecipeBody;

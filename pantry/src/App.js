@@ -24,7 +24,7 @@ function App() {
           <Route exact path="/" component={props=><Login setId={setUserId}/>}/>
           <Route exact path="/Home" component={Home}/>
           <Route path="/Pantry" component={props=><PantryBody userId={userId} identifier={state}/>}/>
-          <Route path="/Recipes" component={props=><RecipeBody state={state}/>}/>
+          <Route path="/Recipes" component={props=><RecipeBody state={state} userId={userId}/>}/>
           <Route path="/Grocery" component={props=><GroceryBody state={state}/>}/>
         </div>
       </div>

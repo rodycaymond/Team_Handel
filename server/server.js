@@ -28,7 +28,6 @@ app.get('/users', (req, res) => {
     .then(data => res.status(200).json(data))
 })
 
-
 // make a new user - needs an object with a user name and password
 app.post('/createuser/', async (req, res) => {
   try {
@@ -45,7 +44,6 @@ app.post('/createuser/', async (req, res) => {
 
 // get the pantry for a specified user id - needs a username or user id
 app.get('/login', (req, res) => {
-  console.log(req.query)
   knex('users').select('*').where({ name: req.query.name }).andWhere({ password: req.query.password })
     .then(data => { res.send(data, 200) })
     .catch(err => { res.send(404) })
@@ -68,6 +66,15 @@ app.post('/ingredient', (req, res) => {
     .insert({ name: req.body.name, perishable: req.body.perishable })
     .then(data => res.status(200).json(data))
     .catch(err => res.status(500))
+})
+
+// get all of a users ingredients in their pantry - needs a path variable of pantry id
+app.get('/pantry/:pantry_id', (req, res) => {
+  knex
+    .select('*').from('pantry_ingredients').where({ pantry_id: req.params.pantry_id })
+    .join('ingredients', 'ingredients.ingredient_id', '=', 'pantry_ingredients.ingredient_id')
+    .then(data => res.send(data, 200))
+    .catch(err => { res.status(500) })
 })
 
 // add an ingredient to a specific pantry - needs an object with name, perishable, amount, amount units, and expiration
@@ -106,15 +113,6 @@ app.delete('/pantry/', async (req, res) => {
   }
 })
 
-// get all of a users ingredients in their pantry - needs a path variable of pantry id
-app.get('/pantry/:pantry_id', (req, res) => {
-  knex
-    .select('*').from('pantry_ingredients').where({ pantry_id: req.params.pantry_id })
-    .join('ingredients', 'ingredients.ingredient_id', '=', 'pantry_ingredients.ingredient_id')
-    .then(data => res.send(data, 200))
-    .catch(err => { res.status(500) })
-})
-
 //get all recipes
 app.get('/recipes/all', (req, res) => {
   knex('recipes').select('*')
@@ -123,9 +121,9 @@ app.get('/recipes/all', (req, res) => {
 })
 
 //get recipes by user - needs a request body with a user_id
-app.get('/recipes', (req, res) => {
-  knex('recipe_id').from('users').where({user_id: req.body.user_id})
-   .join('recipes', 'recipes.recipe_id', '=', 'users.recipe_id')
+app.get('/recipes/:user_id', (req, res) => {
+  knex('recipe_id').from('users_recipes').where({user_id: req.params.user_id})
+   .join('users_recipes', 'recipes.recipe_id', '=', 'users_recipes.recipe_id')
    .then((data) => {res.send(data,200)})
    .catch((err) => {res.send(err, 400)})
 })
@@ -135,10 +133,26 @@ app.post('/recipes/add', async (req, res) => {
   try {
     await knex('recipes').insert({
       recipe_name: req.body.recipe_name,
+      recipe_ingredients: req.body.recipe_ingredients,
       instructions: req.body.instructions
     })
     const lastRecipe = await knex('recipes').max('recipe_id')
-    await knex()
+    await knex('users_recipes').insert({
+      user_id: req.body.user_id,
+      recipe_id: lastRecipe[0].max
+    })
+    res.send(200)
+  }
+  catch(err) {
+    res.send(err, 400)
+  }
+})
+
+// delete a recipe
+app.delete('/recipes/delete/:recipe_id', async (req, res) => {
+  try {
+    await knex('users_recipes').where({recipe_id: req.params.recipe_id}).del()
+    res.send(200)
   }
   catch(err) {
     res.send(err, 400)

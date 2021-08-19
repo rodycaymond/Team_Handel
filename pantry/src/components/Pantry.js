@@ -6,9 +6,10 @@ class PantryBody extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            data: [],
-            delete: undefined
+            data: []
         }
+        this.handleAdd = this.handleAdd.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
     componentDidMount() {
         fetch(`http://localhost:8080/pantry/${this.props.userId}`)
@@ -22,14 +23,16 @@ class PantryBody extends React.Component {
     }
     handleAdd(event){
         event.preventDefault();
+        console.log(event.target.perishable.value);
         let ingred =event.target.New_Item.value;
         let amount = event.target.amount.value;
         let units = event.target.units.value;
-        let perishable = event.target.perishable.value;
+        let perishable = event.target.perishable.value === 'on' ? true : false;
+        console.log(perishable)
         
         fetch(`http://localhost:8080/pantry/${this.props.userId}/addingredient`, {method: 'POST',
             body: {
-                //:user_id
+                //database name : JS variable name//
                 name: ingred,
                 amount: amount, 
                 amount_unit: units,
@@ -89,9 +92,9 @@ class PantryBody extends React.Component {
                             <label htmlFor="amount"></label>
                             <input name='amount' placeholder="Amount"></input>
                             <label htmlFor="units"></label>
-                            <input name='units' placeholder="Units"></input>
-                            <label htmlFor="perishable"></label>
-                            <input name='perishable' placeholder="True or False"></input>
+                            <input name='units' placeholder="Units"></input><br></br>
+                            <label htmlFor="perishable">Is perishable?</label>
+                            <input type='checkbox' name='perishable'></input>
                             <br></br>
                             <input type="submit" text="Add Item" className="submit"></input>
                         </form>
