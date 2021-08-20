@@ -32,9 +32,13 @@ function RecipeBody (props){
             if (!e.Item.length){
                 fetch('http://localhost:8080/recipes/add', {
                     method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({
-                        recipe_name: 'test',
-                        recipe_ingredients: e.Item.value,
+                        recipe_name: e.recipeName.value,
+                        recipe_ingredients: (e.amount.value + ' of ' +e.Item.value + ' '),
                         instructions: e.instructions.value,
                         user_id: props.userId
                     })
@@ -51,10 +55,14 @@ function RecipeBody (props){
             } else if (e.Item.length){
                 console.log(e.Item)
                 let items = [];
-                e.Item.forEach(item=>items.push(item.value))
+                e.Item.forEach((item,index)=>items.push(e.amount[index].value+' of '+item.value + ' '))
                 console.log(items)
                 fetch('http://localhost:8080/recipes/add', {
                     method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({
                         recipe_name: e.recipeName.value,
                         recipe_ingredients: items,
@@ -101,9 +109,10 @@ function RecipeBody (props){
 
         let allRecipes = recipes.map((item,index)=>{
             return (
-                <li key={index}>
-                    <p>{item.recipe_name}</p>
-                    <p>{item.recipe_ingredients}</p>
+                <li key={index} style={{borderBottom: '1px solid whitesmoke'}}>
+                    <p>Name: {item.recipe_name}</p>
+                    <p>Ingredients: {item.recipe_ingredients}</p>
+                    <p>Instructions: {item.instructions}</p>
                 </li>
             )
         });

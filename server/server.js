@@ -95,8 +95,8 @@ app.post('/pantry/:pantry_id/addingredient', async (req, res) => {
     })
     res.send(200)
   }
-  catch {
-    res.send(400)
+  catch(err) {
+    res.send(err, 400)
   }
 })
 
@@ -133,7 +133,7 @@ app.post('/recipes/add', async (req, res) => {
   try {
     await knex('recipes').insert({
       recipe_name: req.body.recipe_name,
-      recipe_ingredients: req.body.recipe_ingredients,
+      recipe_ingredients: req.body.recipe_ingredients.toString(),
       instructions: req.body.instructions
     })
     const lastRecipe = await knex('recipes').max('recipe_id')

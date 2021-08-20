@@ -15,7 +15,7 @@ function App() {
     <Router>
     <div className="App" >
       <div className="title">
-        <Link to="/" className="title">
+        <Link to="/Home" className="title">
           <h1>Pantry</h1>
         </Link>
       </div>
