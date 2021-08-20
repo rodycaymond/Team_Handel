@@ -12,16 +12,15 @@ function Navbar (props) {
     const history = useHistory();
     //useHistory like LINK for react router DOM, without a link. URL Manipulation, appends at end to render right thing
     const pantry = [
-        {value: 'All', label: 'All'},
-        {value: 'Reserved', label: 'Reserved'},
-        {value: 'Unreserved', label: 'Unreserved'}];
+        {value: 'All', label: 'My Pantry'},
+        // {value: 'Reserved', label: 'Reserved'},
+        // {value: 'Unreserved', label: 'Unreserved'}
+    ];
     const recipes = [
         {value: 'Create', label: 'Create'},
-        {value: 'All', label: 'All'},
-        {value: 'Lists', label: 'Lists'},];
+        {value: 'All', label: 'All'}];
     const groceryList = [
-        {value: 'NewList', label: 'New List'},
-        {value: 'CreatedLists', label: 'Created Lists'}
+        {value: 'NewList', label: 'My List'}
         ];
         const [selectedValuePantry, setSelectedValuePantry] = useState('Pantry')
         const [selectedValueRecipes, setSelectedValueRecipes] = useState('Recipes')

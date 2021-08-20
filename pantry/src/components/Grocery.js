@@ -19,22 +19,35 @@ function GroceryBody (props){
     })
     function handleSubmit(event){
         event.preventDefault();
-        console.log('submitted');
-    }
+        console.log('submitted', event.target);
+        fetch('http://localhost:8080/grocerylist/add', {
+            method: 'POST',
+            body:  {
+                   user_id: 1,//req.body.user_id,
+                   name: 'test',//req.body.name,
+                   perishable: true,//req.body.perishable,
+                   amount: 2.0,//req.body.amount,
+                   amount_units: 'test',//req.body.amount_units
+                }
+            })
+            .then(res=>res.json())
+            .then(data=>console.log(data))
+        }
+    
 
     if (props.state === 'NewList'){
         return (
             <div aria-label="GroceryBody">
-                <button onClick={()=>setAddItem(addItem+1)}>Add a new item</button>
                 <form onSubmit={handleSubmit}>
                     <fieldset>
-                        <legend>New Grocery List</legend>
+                        <legend>Groceries</legend>
                         <label htmlFor="list name">Grocery List Name:</label>
                         <input name="list name" placeholder="Ex: Carne Asada"></input>
                         <br></br><br></br>
                         {createInputs}
                     </fieldset>
-                    <input type="submit" className="submit"></input>
+                    <button onClick={()=>setAddItem(addItem+1)}>Add a new item</button>
+                    <input type="submit" className="submit" value="Save" style={{marginLeft: 10}}></input>
                 </form>
             </div>
         )

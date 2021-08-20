@@ -15,6 +15,12 @@ exports.seed = function(knex) {
       {name: 'ground beef', perishable: true},
       {name: 'eggs', perishable: true},
       {name: 'milk', perishable: true},
+      {name: 'goose eggs', perishable: true},
+      {name: 'duck butter', perishable: true},
+      {name: 'artichokes', perishable: true},
+      {name: 'coke zero', perishable: false},
+      {name: 'artisanal mayonnaise', perishable: true},
+      {name: 'calaxian crystals', perishable: false}
     ]);
   });
 };

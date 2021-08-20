@@ -85,7 +85,7 @@ app.post('/pantry/:pantry_id/addingredient', async (req, res) => {
       name: req.body.name,
       perishable: req.body.perishable
     })
-      const lastIngred = await knex('ingredients').max('ingredient_id')
+    const lastIngred = await knex('ingredients').max('ingredient_id')
     await knex('pantry_ingredients').insert({
       ingredient_id: lastIngred[0].max,
       pantry_id: req.params.pantry_id,
@@ -95,19 +95,19 @@ app.post('/pantry/:pantry_id/addingredient', async (req, res) => {
     })
     res.send(200)
   }
-  catch {
-    res.send(400)
+  catch(err) {
+    res.send(err, 400)
   }
 })
 
 // delete a pantry ingredient -> send as query param i.e.: http://localhost:8080/pantry?pantry_id=2&pantry_ingredients_id=6
 app.delete('/pantry/', async (req, res) => {
   try {
-    await knex('pantry_ingredients').where({pantry_id: req.query.pantry_id})
-    .andWhere({pantry_ingredients_id: req.query.pantry_ingredients_id}).del()
+    await knex('pantry_ingredients').where({ pantry_id: req.query.pantry_id })
+      .andWhere({ pantry_ingredients_id: req.query.pantry_ingredients_id }).del()
     res.send(200)
   }
-  catch(err) {
+  catch (err) {
     console.log(err)
     res.send(400)
   }
@@ -116,24 +116,24 @@ app.delete('/pantry/', async (req, res) => {
 //get all recipes
 app.get('/recipes/all', (req, res) => {
   knex('recipes').select('*')
-  .then((data) => {res.send(data, 200)})
-  .catch((err) => {res.send(err, 400)})
+    .then((data) => { res.send(data, 200) })
+    .catch((err) => { res.send(err, 400) })
 })
 
 //get recipes by user - needs a request body with a user_id
 app.get('/recipes/:user_id', (req, res) => {
-  knex('recipe_id').from('users_recipes').where({user_id: req.params.user_id})
-   .join('users_recipes', 'recipes.recipe_id', '=', 'users_recipes.recipe_id')
-   .then((data) => {res.send(data,200)})
-   .catch((err) => {res.send(err, 400)})
+  knex('recipe_id').from('users_recipes').where({ user_id: req.params.user_id })
+    .join('recipes', 'recipes.recipe_id', '=', 'users_recipes.recipe_id')
+    .then((data) => { res.send(data, 200) })
+    .catch((err) => { res.send(err, 400) })
 })
 
-// as a recipe as a user - needs a request body with a user_id, as well as complete recipe object
+// add a recipe as a user - needs a request body with a user_id, as well as complete recipe object
 app.post('/recipes/add', async (req, res) => {
   try {
     await knex('recipes').insert({
       recipe_name: req.body.recipe_name,
-      recipe_ingredients: req.body.recipe_ingredients,
+      recipe_ingredients: req.body.recipe_ingredients.toString(),
       instructions: req.body.instructions
     })
     const lastRecipe = await knex('recipes').max('recipe_id')
@@ -143,7 +143,7 @@ app.post('/recipes/add', async (req, res) => {
     })
     res.send(200)
   }
-  catch(err) {
+  catch (err) {
     res.send(err, 400)
   }
 })
@@ -151,10 +151,52 @@ app.post('/recipes/add', async (req, res) => {
 // delete a recipe
 app.delete('/recipes/delete/:recipe_id', async (req, res) => {
   try {
-    await knex('users_recipes').where({recipe_id: req.params.recipe_id}).del()
+    await knex('users_recipes').where({ recipe_id: req.params.recipe_id }).del()
     res.send(200)
   }
-  catch(err) {
+  catch (err) {
+    res.send(err, 400)
+  }
+})
+
+// get grocery list items by user_id - requires user_id in url
+app.get('/grocerylist/:user_id', (req, res) => {
+  knex('grocery_list_item_id').from('users_grocery_list').where({ user_id: req.params.user_id })
+    .join('grocery_list_items', 'grocery_list_items.grocery_list_item_id', '=', 'users_grocery_list.grocery_list_item_id')
+    .join('ingredients', 'ingredients.ingredient_id', '=', 'grocery_list_items.ingredient_id')
+    .then((data) => res.send(data, 200))
+    .catch((err) => res.send(err, 400))
+})
+
+// add a grocery list item as a user - requires an object with:
+// {
+//   user_id: req.body.user_id
+//   name: req.body.name
+//   perishable: req.body.perishable
+//   amount: req.body.amount
+//   amount_units: req.body.amount_units
+// }
+
+app.post('/grocerylist/add', async (req, res) => {
+  try {
+    await knex('ingredients').insert({
+      name: req.body.name, perishable: req.body.perishable
+    })
+    const lastIngred = await knex('ingredients').max('ingredient_id')
+    await knex('grocery_list_items').insert({
+      ingredient_id: lastIngred[0].max, //TODO: need to add logic to check if ingredient has been entered before, to avoid duplicates on ingredient table
+      amount: req.body.amount,
+      amount_units: req.body.units,
+      checked: false
+    })
+    const lastGrocItem = await knex('grocery_list_items').max('grocery_list_item_id')
+    await knex('users_grocery_list').insert({
+      user_id: req.body.user_id,
+      grocery_list_item_id: lastGrocItem[0].max
+    })
+    res.send(200)
+  }
+  catch (err) {
     res.send(err, 400)
   }
 })
