@@ -1,7 +1,7 @@
 
 exports.up = function (knex) {
     return knex.schema.createTable('pantry_ingredients', table => {
-        table.increments('pantry_ingredients_id') // no serial
+        table.increments('pantry_ingredients_id')
         table.integer('pantry_id')
         table.foreign('pantry_id').references('pantry.pantry_id')
         table.integer('ingredient_id')
